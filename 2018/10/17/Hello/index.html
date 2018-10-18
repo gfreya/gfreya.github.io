@@ -92,7 +92,7 @@
 	
 		<i class="iconfont icon-words"></i>
 		<span>
-			157
+			2248
 		</span>
 	
 </div>
@@ -111,6 +111,20 @@
 </ul>
 </blockquote>
 <a id="more"></a> 
+<hr>
+<h3 id="Expenses-of-Algorithms"><a href="#Expenses-of-Algorithms" class="headerlink" title="Expenses of Algorithms"></a>Expenses of Algorithms</h3><p>Good algorithms in my eyes must first solve the problem correctly. This is the basis. If the 100 experiments have 10 large deviations, even if the code is beautiful, it is futile. Secondly, it must have good readability. And considering the possibility of post-maintenance, a good algorithm must have sufficient maintainability. Finally, the focus of this article, the introduction of this series, is the time performance of the algorithm.</p>
+<p>The operation of an algorithm produces two kinds of overhead:<br>1) Processing time;<br>2) Space or Memory.</p>
+<p>When we choose which algorithm to use, we must balance the usage and cost between time and space.</p>
+<hr>
+<h3 id="Measure-the-running-time-of-the-algorithm"><a href="#Measure-the-running-time-of-the-algorithm" class="headerlink" title="Measure the running time of the algorithm"></a>Measure the running time of the algorithm</h3><p>There are three ways to measure the running time of an algorithm: benchmarking, counting command, and complexity analysis.</p>
+<p><strong><em>1) Benchmarking:</em></strong><br>One way to measure the time cost of an algorithm is to use the computer’s clock to get an actual run time. This process is called benchmarking or profiling.</p>
+<p>The method is to first determine the time of several different data sets with the same size, and then calculate the average time; then collect similar data for the larger and larger data sets. After several such tests, using enough data to predict the performance of an algorithm for a data set of any size.</p>
+<p><strong><em>2) Counting Command:</em></strong><br>Another technique for estimating the performance of an algorithm is to count the number of instructions to be executed on different problem sizes. No matter what platform is run on this platform, a good prediction is given to the abstract workload that the algorithm is to perform.</p>
+<p>When counting instructions, what is counted is the number of instructions in the higher-level code used to write the algorithm, not the number of instructions in the program that commands the machine language.</p>
+<p>When analyzing algorithms in this way, you need to distinguish between two types of instructions:<br>1) Execute the same number of instructions regardless of the size of the problem;<br>2) Execute different orders according to the size of the problem.<br>The first type of instructions can be ignored for performance, and the second type of instructions can be found in loops and recursion.</p>
+<p><strong><em>3) Complexity Analysis:</em></strong></p>
+<p>Using complexity analysis, you will completely get rid of platform-dependent or unrealistic statistics of large amounts of data.</p>
+<p>We use Big-O notation to go on complexity analysis. The question scale will change including C, log2n, n, n^2, 2^n, and so on.</p>
   	
 					
 	  </div>     
