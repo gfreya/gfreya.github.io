@@ -90,6 +90,11 @@
 
 	
 	
+		<i class="iconfont icon-words"></i>
+		<span>
+			3786
+		</span>
+	
 </div>
 
 </div> 
@@ -100,7 +105,74 @@
 		
 
 			
-					  	
+					<blockquote>
+<ul>
+<li>This is introduction about the algorithms coded in python. Python is a programming language with objects, modules, threads, exceptions and automatic memory management. The benefits of pythons are that that is simple and easy, portable, extensible, build-in data structure and it is an open source. </li>
+</ul>
+</blockquote>
+<a id="more"></a> 
+<hr>
+<h2 id="Python-Common-Algorithms"><a href="#Python-Common-Algorithms" class="headerlink" title="Python Common Algorithms"></a>Python Common Algorithms</h2><ul>
+<li style="list-style: none"><input type="checkbox"> Definition of Algorithms</li>
+<li style="list-style: none"><input type="checkbox"> Time Complexity</li>
+<li style="list-style: none"><input type="checkbox"> Common algorithm examples</li>
+</ul>
+<hr>
+<h3 id="Definition-of-Algorithms"><a href="#Definition-of-Algorithms" class="headerlink" title="Definition of Algorithms"></a>Definition of Algorithms</h3><p>Algorithm is an accurate and complete description of the solution. It is a series of clear instructions for solving problems. The algorithm represents a systematic way to describe the problem-solving strategy. That is to say, it is possible to obtain the required output in a limited time for a certain specification input. If an algorithm is flawed or not suitable for a problem, executing this algorithm will not solve the problem. Different algorithms may accomplish the same task with different time, space or efficiency. The pros and cons of an algorithm can be measured in terms of space complexity and time complexity.</p>
+<p>An algorithm should have the following seven important characteristics:<br>1) Finiteness: The finiteness of the algorithm means that the algorithm must be able to terminate after performing a limited number of steps;<br>2) Definiteness: Each step of the algorithm must have an exact definition;<br>3) Input: An algorithm has zero or more inputs to characterize the initial state of the operand. The so-called zero input means that the algorithm itself determines the initial condition;<br>4) Output: An algorithm has one or more outputs to reflect the results of processing the input data. Algorithms without output are meaningless;<br>5) Effectiveness: Any calculation step performed in the algorithm can be broken down into basic executable steps, that is, each calculation step can be completed in a limited time (also called validity);<br>6) High Efficiency: Fast execution and low resource consumption;<br>7) Robustness: Responding correctly to the data.</p>
+<hr>
+<h3 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h3><p>In computer science, the time complexity of an algorithm is a function that quantitatively describes the running time of the algorithm. The time complexity is usually a Big-O notation. Big O notation is a mathematical symbol used to describe the progression of a function. Rather, it uses another (usually simpler) function to describe the asymptotic upper bound of the order of magnitude of a function. In mathematics, it is generally used to characterize the remainder of a truncated infinite series, especially an asymptotic series; in computer science, it is very useful in analyzing the complexity of an algorithm. The expression, when used in this way, the time complexity can be said to be asymptotic, which examines the case when the input value approaches infinity.</p>
+<hr>
+<h3 id="Common-Algorithms-Examples"><a href="#Common-Algorithms-Examples" class="headerlink" title="Common Algorithms Examples"></a>Common Algorithms Examples</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:right">Complexity</th>
+<th style="text-align:center">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bubble Sort</td>
+<td style="text-align:right">O(N*N)</td>
+<td style="text-align:center">Small number float upward</td>
+</tr>
+<tr>
+<td>Insertion Sort</td>
+<td style="text-align:right">O(N*N)</td>
+<td style="text-align:center">Take out elements one by one</td>
+</tr>
+<tr>
+<td>Selection Sort</td>
+<td style="text-align:right">O(N*N)</td>
+<td style="text-align:center">Recursion</td>
+</tr>
+<tr>
+<td>Quick Sort</td>
+<td style="text-align:right">O(N*log2(N))</td>
+<td style="text-align:center">Choose medium element</td>
+</tr>
+<tr>
+<td>Heap Sort</td>
+<td style="text-align:right">O(N*log2(N))</td>
+<td style="text-align:center">Approximate complete binary tree</td>
+</tr>
+<tr>
+<td>Shell Sort</td>
+<td style="text-align:right">O(n^(1+￡))</td>
+<td style="text-align:center">Choose a step</td>
+</tr>
+<tr>
+<td>Bin Sort</td>
+<td style="text-align:right">O(N)</td>
+<td style="text-align:center">A sort of distribution sort</td>
+</tr>
+</tbody>
+</table>
+<p>1) Bubble sort<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data_set = [ <span class="number">9</span>,<span class="number">1</span>,<span class="number">22</span>,<span class="number">31</span>,<span class="number">45</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">11</span> ]</span><br><span class="line">loop_count = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(data_set)):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(data_set) - j- <span class="number">1</span>): </span><br><span class="line">        <span class="keyword">if</span> data_set[i] &gt; data_set[i+<span class="number">1</span>]: <span class="comment">#switch</span></span><br><span class="line">            tmp = data_set[i]</span><br><span class="line">            data_set[i] = data_set[i+<span class="number">1</span>]</span><br><span class="line">            data_set[i+<span class="number">1</span>] = tmp</span><br><span class="line">        loop_count +=<span class="number">1</span></span><br><span class="line">    print(data_set)</span><br><span class="line">print(data_set)</span><br><span class="line">print(<span class="string">"loop times"</span>, loop_count)<span class="string">'</span></span><br></pre></td></tr></table></figure></p>
+<p>2) Selection sort<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">data_set = [ <span class="number">9</span>,<span class="number">1</span>,<span class="number">22</span>,<span class="number">31</span>,<span class="number">45</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">2</span>,<span class="number">11</span> ]</span><br><span class="line">smallest_num_index = <span class="number">0</span> <span class="comment">#initialize the minimum, default is the first element.</span></span><br><span class="line"> </span><br><span class="line">loop_count = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(len(data_set)):</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(j,len(data_set)):</span><br><span class="line">        <span class="keyword">if</span> data_set[i] &lt; data_set[smallest_num_index]: <span class="comment">#current element less than min</span></span><br><span class="line">            smallest_num_index = i</span><br><span class="line">        loop_count +=<span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"smallest num is "</span>,data_set[smallest_num_index])</span><br><span class="line">        tmp = data_set[smallest_num_index]</span><br><span class="line">        data_set[smallest_num_index] =  data_set[j]</span><br><span class="line">        data_set[j] = tmp</span><br><span class="line"> </span><br><span class="line">    print(data_set)</span><br><span class="line">    print(<span class="string">"loop times"</span>, loop_count)</span><br></pre></td></tr></table></figure></p>
+<p>3) Insertion sort<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">source = [<span class="number">92</span>, <span class="number">77</span>, <span class="number">67</span>, <span class="number">8</span>, <span class="number">6</span>, <span class="number">84</span>, <span class="number">55</span>, <span class="number">85</span>, <span class="number">43</span>, <span class="number">67</span>]</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> range(<span class="number">1</span>,len(source)):</span><br><span class="line">    current_val = source[index] </span><br><span class="line">    position = index</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> position &gt; <span class="number">0</span> <span class="keyword">and</span> source[position<span class="number">-1</span>] &gt; current_val: </span><br><span class="line">        source[position] = source[position<span class="number">-1</span>] </span><br><span class="line">        position -= <span class="number">1</span> </span><br><span class="line">    source[position] = current_val </span><br><span class="line">    print(source)</span><br></pre></td></tr></table></figure></p>
+  	
 					
 	  </div>     
 	  
