@@ -92,7 +92,7 @@
 	
 		<i class="iconfont icon-words"></i>
 		<span>
-			360
+			5153
 		</span>
 	
 </div>
@@ -111,6 +111,30 @@
 </ul>
 </blockquote>
 <a id="more"></a> 
+<hr>
+<h2 id="Optimization-algorithms"><a href="#Optimization-algorithms" class="headerlink" title="Optimization algorithms"></a>Optimization algorithms</h2><ul>
+<li style="list-style: none"><input type="checkbox"> Introduction of multi-task-optmization</li>
+<li style="list-style: none"><input type="checkbox"> My solution – Multi Tasks Optimization</li>
+<li style="list-style: none"><input type="checkbox"> Thinking</li>
+</ul>
+<hr>
+<h3 id="Introduction-of-Multi-task-opt"><a href="#Introduction-of-Multi-task-opt" class="headerlink" title="Introduction of Multi-task-opt"></a>Introduction of Multi-task-opt</h3><p>Multi-objective planning is a branch of mathematical programming. Study the optimization of more than one objective function over a given area. Also known as multi-objective optimization. Usually referred to as MOP (multi-objective programming).</p>
+<p>Study the optimization of more than one objective function over a given area. Also known as multi-objective optimization. Usually recorded as VMP. In many practical issues, such as economics, management, military, scientific and engineering design. Measuring the quality of a program is often difficult to judge with one indicator, but needs to be judged by multiple goals, which are sometimes not coordinated or even contradictory.</p>
+<hr>
+<h3 id="My-solution-–-Multi-task-opt"><a href="#My-solution-–-Multi-task-opt" class="headerlink" title="My solution – Multi-task-opt"></a>My solution – Multi-task-opt</h3><p>1) Use case diagram for multi-task-opt<br><img src="http://on-img.com/chart_image/5bc8379be4b0bd4db969e61e.png" alt="use case"></p>
+<p>2) Module diagram for multi-task-opt<br><img src="http://on-img.com/chart_image/5bc83a27e4b06fc64b225194.png" alt="module"></p>
+<p>3) Method for solving multi-task-opt<br>There are roughly the following methods for solving multi-objective programming:<br>a) One is to reduce the multi-objective into a single target or a double target that is easier to solve, such as the main target method, the linear weighting method, the ideal point method, and the like;<br>b) The other is called the hierarchical sequence method, that is, the target is given a sequence according to its importance, and each time the next target optimal solution is obtained in the previous target optimal solution set until the common optimal solution is obtained;<br>c) In addition to the above methods, the linear programming of multi-objectives can also be modified by the simplex method;<br>d) There is also a kind of analytic hierarchy process, which was proposed by American operations researcher Shadan in the 1970s. It is a multi-objective decision-making and analysis method combining qualitative and quantitative. It has complex target structure and lacks necessary data. The situation is more practical.</p>
+<p>4) Algorithm requirements<br>There are only a few evaluation targets (the case where the two response variables are implemented by the algorithm), and the multi-objectives are optimized according to the importance weight of the response variables to obtain a set of data with the largest composite desirability. It is possible to find a multi-target response optimized variable value, a response variable value, a single desirability of each response variable, and a composite desirability.</p>
+<p>5) Module design for multi-task-opt<br>The multi-task optimization is mainly to find the highest desirability, so the main function is divided into nine functional modules to find the multi-task optimized variable value, the response variable value, the individual response variable’s desirability and the composite desirability.</p>
+<p>The process of optimizing the objective function using the minimum function is similar to the single target response optimization, and will not be described here. According to the mathematical formula provided by minitab, the desirability of a single response variable is obtained, and the composite desirability is obtained by using weights and the like.</p>
+<p>6) Detailed solutions<br>The main idea adopted is to use the linear weighting method of single-objective programming, that is, weighting multiple objective functions into one function for single-objective programming.</p>
+<p>Firstly, the multivariate regression analysis is performed on the response variable and the selected variables respectively, and the parameters of each regression factor in different objective functions are obtained, and then the linear calculation of the parameters is performed according to the requirements.</p>
+<p>When the two objective functions are to be minimized, the two fitted parameters are directly added, and the splicing function is minimized by using the minimum function; when both objective functions are maximized, since Python only provides the minimum Function, so the two columns of parameters are inversed and then added to form a new parameter and then obtain a new function, and then use the minimum function to minimize the processing; when the target function has a target value response optimization problem, it will need to be The target value optimized function is changed to the absolute value of the ‘target value -f(x)’, and then the minimum function is used to operate.</p>
+<p>According to the value of the obtained response variable, the single desirability of the single response variable can be calculated according to the upper and lower limits (ie, the maximum value and the minimum value) of the response variable, and the composite desirability is obtained according to the formula.</p>
+<hr>
+<h3 id="Thinking"><a href="#Thinking" class="headerlink" title="Thinking"></a>Thinking</h3><p>There exist some details in the solutions. When it comes to the initial values and the boundary values, there are two solutions. If the customer assigns the required values, the function minimize will use the assigned values. However, if there is no assigned values, the program will assigned a default values for function minimize. The default initial value is the minimum value in the column and the boundary value is the interval between the minimum and maximum value.</p>
+<p>The calculation of the composite desirability is composed by several steps. Firstly, it is a need to get the single desirability for each function. Secondly, using the formula and assigned weight to calculate the needed composite desirability.</p>
+<p>There is an additional step for multi-task-opt. Sometimes the final response values calculated by the highest composite desirability will exceed the boundary values, so it is a must to have some constraints of the response values.</p>
   	
 					
 	  </div>     
@@ -226,7 +250,7 @@
     
     <div class="search-container sildeUpMin">
         <div class="search-header">
-            <input type="text" placeholder="输入你想搜索的" id="search-input" class="search-input">
+            <input type="text" placeholder="Typing Something here." id="search-input" class="search-input">
             <span class="search-cancel">
                 <i class="iconfont icon-cancel">
             </i></span>
@@ -237,37 +261,37 @@
      <div class="mobile-menu">      
 
       
-      <img class="mobile-menu-icon" src="/images/favicon.png">   
+      <img class="mobile-menu-icon lazyload" src="/images/placeholder.png" data-src="/images/favicon.png">   
       
 
          
             
 
-            <a class="mobile-menu-link" href="/">首页
+            <a class="mobile-menu-link" href="/">Home
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/archives">归档
+            <a class="mobile-menu-link" href="/archives">Archives
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/tags">标签
+            <a class="mobile-menu-link" href="/tags">Tags
             </a>
             
          
             
 
-            <a class="mobile-menu-link" href="/about">关于
+            <a class="mobile-menu-link" href="/about">About
             </a>
             
          
                           
 
-            <a class="mobile-menu-link mobile-menu-search" href="#">搜索 </a>                 
+            <a class="mobile-menu-link mobile-menu-search" href="#">Search </a>                 
             
          
       
