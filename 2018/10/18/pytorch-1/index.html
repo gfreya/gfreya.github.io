@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  Pytorch(1) |   Freya Guo </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <div class="header-logo">
+      <a href="/">
+        <img class="header-logo-img" src="/images/logo.png">
+      </a>
+    </div>
+
+    <div class="header-menu">          
+              
+          
+            <a class="header-menu-link" id="header-menu-home" href="/">
+              <i class="iconfont icon-home">  
+            </i></a>     
+          
+              
+          
+            <a class="header-menu-link" id="header-menu-archives" href="/archives">
+              <i class="iconfont icon-archives">  
+            </i></a>     
+          
+              
+          
+            <a class="header-menu-link" id="header-menu-tags" href="/tags">
+              <i class="iconfont icon-tags">  
+            </i></a>     
+          
+              
+          
+            <a class="header-menu-link" id="header-menu-about" href="/about">
+              <i class="iconfont icon-about">  
+            </i></a>     
+          
+              
+          
+              <a class="header-menu-link" id="header-menu-search">
+                <i class="iconfont icon-search">  
+              </i></a>
+          
+                  
+    </div>  
+    
+  </nav>
+</header>
+
+   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		pytorch(1)
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		Oct 18, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			5706
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="typo post-content slideDownMin">
+
+		
+
+			
+					<blockquote>
+<ul>
+<li>In view of my current research about classification of gene mutation, I will share some knowledge about deep learning.</li>
+</ul>
+</blockquote>
+<a id="more"></a> 
+<hr>
+<h2 id="Use-of-pytorch"><a href="#Use-of-pytorch" class="headerlink" title="Use of pytorch"></a>Use of pytorch</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> Automatic gradient</li>
+<li style="list-style: none"><input type="checkbox" checked> Create neural networks</li>
+</ul>
+<hr>
+<h3 id="Automatic-gradient"><a href="#Automatic-gradient" class="headerlink" title="Automatic gradient"></a>Automatic gradient</h3><p>The autograd package is the core of all neural networks in PyTorch. Learn some basics first, then start training the first neural network. The autograd package provides automatic derivation of all operations on the Tensors. It’s a define-by-run framework, which means that backpropagation is defined by the code’s behavior and each single iteration may be different.</p>
+<p>1) Variable<br>autograd.Variable is the central class for this package. It packs a Tensor and supports almost all operations. Once you have completed your calculations, you can call .backward() and all gradients can be calculated automatically.</p>
+<p>You can access the original tensor using the .data property. Gradient values ​​relative to variables can be accumulated into .grad.</p>
+<p>Variables and functions are interrelated and create an acyclic graph. Each variable has a .grad_fn attribute that references a function that created the variable <em>(except for those created by the user - their grad_fn is empty)</em>.</p>
+<p>If you want to calculate the derivative, you can call .backward() on Variable. If the variable is a scalar (only one element), you don’t need to determine any parameters for backward(). However, if it has multiple elements, you need to determine the grad_output parameter <em>(this is a tensor with a matching shape)</em>.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br></pre></td></tr></table></figure></p>
+<p>create a variable<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = Variable(torch.ones(<span class="number">2</span>,<span class="number">2</span>), requires_grad=<span class="keyword">True</span>)</span><br><span class="line">print(x)</span><br></pre></td></tr></table></figure></p>
+<p>do an operation on the variable<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y = x + <span class="number">2</span></span><br><span class="line">print(y)</span><br></pre></td></tr></table></figure></p>
+<p>y is created as a result of an operation, so it has grad_fn.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(y.grad_fn)</span><br></pre></td></tr></table></figure></p>
+<p>do more operations in y<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">z = y*y*<span class="number">3</span></span><br><span class="line">out = z.mean()</span><br><span class="line">print(z, out)</span><br></pre></td></tr></table></figure></p>
+<p>2) Gradients<br>Let’s do the backpropagation now. Out.backward() is equivalent to out.backward(torch.Tensor([1.0])).<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">out.backward()</span><br></pre></td></tr></table></figure></p>
+<p>print gradient d(out)/dx<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure></p>
+<p>autograd can do more<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = torch.randn(<span class="number">3</span>)</span><br><span class="line">x = Variable(x, requires_grad=<span class="keyword">True</span>)</span><br><span class="line">y = x * <span class="number">2</span></span><br><span class="line"><span class="keyword">while</span> y.grad.norm() &lt; <span class="number">1000</span>:</span><br><span class="line">   y = y * <span class="number">2</span></span><br><span class="line">print(y)</span><br><span class="line">gradients = torch.FloatTensor([<span class="number">0.1</span>,<span class="number">1.0</span>,<span class="number">0.0001</span>])</span><br><span class="line">y.backwward(gradients)</span><br><span class="line">print(x.grad)</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="create-neural-networks"><a href="#create-neural-networks" class="headerlink" title="create neural networks"></a>create neural networks</h3><p>Neural networks can be built using torch.nn. nn relies on autograd to define the model and derive it. An nn.Module contains layers of the network, and forward(input) can return output.</p>
+<p>The typical steps for training a neural network are as follows:<br>a) Define a neural network that contains parameters that can be learned (such as weights)<br>b) Iterating over the input dataset<br>c) Use the network to process input data<br>d) Calculate loss (how far the output value is from the correct value)<br>e) Backpropagate the gradient back to the network parameters<br>f) Update the weight of the network, using a simple update rule: weight = weight - learning_rate<em> gradient, ie: new weight = old weight - learning rate </em> gradient value.</p>
+<p>1) Define a neural network<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.autograd <span class="keyword">import</span> Variable</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Net</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(Net, self).__init__()</span><br><span class="line">        <span class="comment"># 1 input image channel, 6 output channels, 5x5 square convolution</span></span><br><span class="line">        <span class="comment"># kernel</span></span><br><span class="line">        self.conv1 = nn.Conv2d(<span class="number">1</span>, <span class="number">6</span>, <span class="number">5</span>)</span><br><span class="line">        self.conv2 = nn.Conv2d(<span class="number">6</span>, <span class="number">16</span>, <span class="number">5</span>)</span><br><span class="line">        <span class="comment"># an affine operation: y = Wx + b</span></span><br><span class="line">        self.fc1 = nn.Linear(<span class="number">16</span> * <span class="number">5</span> * <span class="number">5</span>, <span class="number">120</span>)</span><br><span class="line">        self.fc2 = nn.Linear(<span class="number">120</span>, <span class="number">84</span>)</span><br><span class="line">        self.fc3 = nn.Linear(<span class="number">84</span>, <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        <span class="comment"># Max pooling over a (2, 2) window</span></span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv1(x)), (<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">        <span class="comment"># If the size is a square you can only specify a single number</span></span><br><span class="line">        x = F.max_pool2d(F.relu(self.conv2(x)), <span class="number">2</span>)</span><br><span class="line">        x = x.view(<span class="number">-1</span>, self.num_flat_features(x))</span><br><span class="line">        x = F.relu(self.fc1(x))</span><br><span class="line">        x = F.relu(self.fc2(x))</span><br><span class="line">        x = self.fc3(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">num_flat_features</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        size = x.size()[<span class="number">1</span>:]  <span class="comment"># all dimensions except the batch dimension</span></span><br><span class="line">        num_features = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> size:</span><br><span class="line">            num_features *= s</span><br><span class="line">        <span class="keyword">return</span> num_features</span><br><span class="line">net = Net()</span><br><span class="line">print(net)</span><br></pre></td></tr></table></figure></p>
+<p>You only need to define the forward function, then the backward function (the gradient is calculated in this function) will be automatically defined using autograd. You can use any of Tensor’s operations in the forward function.</p>
+<p>The learned parameters can be returned by net.parameters().</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">params = list(net.parameters())</span><br><span class="line">print(len(params))</span><br><span class="line">print(params[<span class="number">0</span>].size())  <span class="comment"># conv1's .weight</span></span><br></pre></td></tr></table></figure>
+<p>2) Loss Function<br>The loss function uses the output value and the target value as input parameters to calculate how far the output value is from the target value. There are many different loss functions in the nn package. The simplest loss is nn.MSELoss, which calculates the mean square error between the output and the target.</p>
+<p>For example:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">output = net(input)</span><br><span class="line">target = Variable(torch.arange(<span class="number">1</span>, <span class="number">11</span>))  <span class="comment"># a dummy target, for example</span></span><br><span class="line">criterion = nn.MSELoss()</span><br><span class="line"></span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">print(loss)</span><br></pre></td></tr></table></figure></p>
+<p>When we call loss.backward(), the entire graph is about loss, and all the Variables in the graph will have their own .grad variable.</p>
+<p>In order to understand, we perform several reverse steps.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">print(loss.grad_fn)  <span class="comment"># MSELoss</span></span><br><span class="line">print(loss.grad_fn.next_functions[<span class="number">0</span>][<span class="number">0</span>])  <span class="comment"># Linear</span></span><br><span class="line">print(loss.grad_fn.next_functions[<span class="number">0</span>][<span class="number">0</span>].next_functions[<span class="number">0</span>][<span class="number">0</span>])  <span class="comment"># ReLU</span></span><br></pre></td></tr></table></figure></p>
+<p>3) Backpropagation<br>Error backpropagation can be done using loss.backward(). You need to clear the existing gradient values, otherwise the gradient will accumulate on the existing gradient.</p>
+<p>Now, let’s call loss.backward() to see the value of the bias gradient of conv1 before and after the backward.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">net.zero_grad()     <span class="comment"># zeroes the gradient buffers of all parameters</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad before backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br><span class="line"></span><br><span class="line">loss.backward()</span><br><span class="line"></span><br><span class="line">print(<span class="string">'conv1.bias.grad after backward'</span>)</span><br><span class="line">print(net.conv1.bias.grad)</span><br></pre></td></tr></table></figure></p>
+<p>4) Update weight<br>The simplest update rule in practice is StochasticGradient Descent (SGD).</p>
+<p>weight = weight - learning_rate * gradient</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">learning_rate = <span class="number">0.01</span></span><br><span class="line"><span class="keyword">for</span> f <span class="keyword">in</span> net.parameters():</span><br><span class="line">    f.data.sub_(f.grad.data * learning_rate)</span><br></pre></td></tr></table></figure>
+<p>But when you use neural networks, you may want to try a variety of different update rules, such as SGD, Nesterov-SGD, Adam, RMSProp, etc. To implement this functionality, there is a package called torch.optim that has been implemented. It is also very convenient to use it:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim</span><br><span class="line"></span><br><span class="line"><span class="comment"># create your optimizer</span></span><br><span class="line">optimizer = optim.SGD(net.parameters(), lr=<span class="number">0.01</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># in your training loop:</span></span><br><span class="line">optimizer.zero_grad()   <span class="comment"># zero the gradient buffers</span></span><br><span class="line">output = net(input)</span><br><span class="line">loss = criterion(output, target)</span><br><span class="line">loss.backward()</span><br><span class="line">optimizer.step()    <span class="comment"># Does the update</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<p>Original article: <a href="https://blog.csdn.net/zzlyw/article/details/78768996" target="_blank" rel="noopener">https://blog.csdn.net/zzlyw/article/details/78768996</a></p>
+  	
+					
+	  </div>     
+	  
+
+	<div class="post-footer">
+
+  <div class="post-footer-other">
+      <span class="post-footer-item">
+        
+
+
+
+
+<span class="donate-btn">
+	<span class="iconfont icon-donate"></span>
+</span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="noLazyLoad donate-img" src="/images/donate1.png" alt="No Donate Image!">	
+		<img id="donate-qr-alipay" class="noLazyLoad donate-img" src="/images/donate2.png" alt="No Donate Image!">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+      </span>           
+      <span class="post-footer-item">
+        
+	
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn">
+	<span class="iconfont icon-share"></span>
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		<div class="-mob-inner">
+		   			             
+            <a class="iconfont icon-share-qq -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-weixin -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-weibo -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-douban -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-facebook -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-twitter -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-google -mob-share-link"></a>		
+     	   
+		</div>
+	</div>	
+
+      </span>           
+  </div>  
+
+  <div class="post-footer-meta">
+        	
+
+        
+          <i class="iconfont icon-tag"></i>     
+            <a class="tag-link" href="/tags/deep-learning/">deep learning</a> <a class="tag-link" href="/tags/python/">python</a>    
+        	
+  </div>
+
+</div>
+
+
+<nav class="post-footer-nav">
+  
+  
+    <div class="post-footer-link">
+      <a href="/2018/10/18/Medical-Knowledge-Graph/" id="post-nav-older" class="post-nav-link-wrap">
+        <strong class="post-nav-caption">older</strong>
+        
+          <a class="post-nav-title" href="/2018/10/18/Medical-Knowledge-Graph/">
+          Medical-Knowledge-Graph</a>
+      </a>
+    </div>
+  
+</nav>
+ 
+	
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+    <div class="search-container sildeUpMin">
+        <div class="search-header">
+            <input type="text" placeholder="Typing Something here." id="search-input" class="search-input">
+            <span class="search-cancel">
+                <i class="iconfont icon-cancel">
+            </i></span>
+        </div>
+        <div id="search-result" class="search-result"></div>
+    </div>
+ 
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">Home
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">Archives
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">Tags
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">About
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">Search </a>                 
+            
+         
+      
+</div>        
+    
+
+
+
+     
+    
+
+
+
+
+<footer id="footer">	    
+
+		
+		<div class="footer-copyright">
+		&copy;
+		
+		2018		
+	
+		Lemon
+		<br>
+
+		Theme by
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
