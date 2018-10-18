@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  
+  
+  <title>  Medical-Knowledge-Graph |   Freya Guo </title>
+
+ 
+  
+    <link rel="icon" href="/images/favicon.png">
+  
+
+
+  <link rel="stylesheet" href="/nayo.min.css"> 
+</head>  
+  <body>   
+    
+      <header class="header">
+	
+  <nav class="header-nav">        
+
+    <span class="iconfont icon-menu mobile-toggle"></span>   	
+
+    <div class="header-logo">
+      <a href="/">
+        <img class="header-logo-img" src="/images/logo.png">
+      </a>
+    </div>
+
+    <div class="header-menu">          
+              
+          
+            <a class="header-menu-link" id="header-menu-home" href="/">
+              <i class="iconfont icon-home">  
+            </i></a>     
+          
+              
+          
+            <a class="header-menu-link" id="header-menu-archives" href="/archives">
+              <i class="iconfont icon-archives">  
+            </i></a>     
+          
+              
+          
+            <a class="header-menu-link" id="header-menu-tags" href="/tags">
+              <i class="iconfont icon-tags">  
+            </i></a>     
+          
+              
+          
+            <a class="header-menu-link" id="header-menu-about" href="/about">
+              <i class="iconfont icon-about">  
+            </i></a>     
+          
+              
+          
+              <a class="header-menu-link" id="header-menu-search">
+                <i class="iconfont icon-search">  
+              </i></a>
+          
+                  
+    </div>  
+    
+  </nav>
+</header>
+
+   
+
+      <div class="container">       
+          
+          
+            <section class="main">  
+          
+
+          <article class="post">
+  
+	<div class="post-header">
+
+	<p class="post-title">	
+		Medical-Knowledge-Graph
+	</p>
+			
+
+	<div class="meta-info">	
+	<span>
+		Oct 18, 2018
+	</span>
+
+	
+	
+		<i class="iconfont icon-words"></i>
+		<span>
+			12498
+		</span>
+	
+</div>
+
+</div> 
+	 
+
+	  <div class="typo post-content slideDownMin">
+
+		
+
+			
+					<blockquote>
+<ul>
+<li>This is our research team’s achievement of constructing knowledge graph in medical area. It mainly uses some simple statistical method including naive Bayes and Noisy OR.</li>
+</ul>
+</blockquote>
+<a id="more"></a> 
+<hr>
+<h2 id="A-knowledge-graph-construction-method-for-smart-medical-care"><a href="#A-knowledge-graph-construction-method-for-smart-medical-care" class="headerlink" title="A knowledge graph construction method for smart medical care"></a>A knowledge graph construction method for smart medical care</h2><ul>
+<li style="list-style: none"><input type="checkbox" checked> Technical field</li>
+<li style="list-style: none"><input type="checkbox" checked> Background technique</li>
+<li style="list-style: none"><input type="checkbox" checked> Contents of the invention</li>
+<li style="list-style: none"><input type="checkbox" checked> Main contribution of this article</li>
+</ul>
+<hr>
+<h3 id="Technical-field"><a href="#Technical-field" class="headerlink" title="Technical field"></a>Technical field</h3><p>The invention belongs to the field of knowledge-oriented graph technology, and relates to a method for constructing a knowledge map, and relates to learning of related statistical models.</p>
+<hr>
+<h3 id="Background-technique"><a href="#Background-technique" class="headerlink" title="Background technique"></a>Background technique</h3><p>With the rapid development of artificial intelligence, the key issues of knowledge extraction, representation, fusion, reasoning, question and answer, etc. involved in knowledge mapping have been solved and broken to a certain extent. Knowledge map has become a new hotspot in the field of knowledge service, and has been accepted by scholars at home and abroad. The industry is widely concerned.</p>
+<p>Knowledge map is the frontier research problem of intelligent big data. It conforms to the development of information age with its unique technical advantages, such as incremental data pattern design; good data integration; existing RDF, OWL and other standards support; semantics Search and knowledge reasoning capabilities, etc. In the medical field, with the development of regional health information and medical information systems, a large amount of medical data has been accumulated. How to extract information from these data, and manage, share and apply it is the key issue to promote medical intelligence. It is the basis for medical knowledge retrieval, clinical diagnosis, medical quality management, electronic medical records and intelligent processing of health records.</p>
+<p>In recent years, the demand for medical clinical decision support and assisted diagnostic systems has increased dramatically. Existing platforms or systems rely on a knowledge base that is manually edited by a large number of professionals or generated using simple statistical data. By constructing a knowledge map in the medical field, medical knowledge can be extracted from massive data and managed, shared and applied reasonably and efficiently. This paper directly explores the relationship between disease and symptoms, disease and examination from electronic medical records, and studies and implements the medical knowledge map construction process based on electronic medical records, which provides a basis for subsequent intelligent question and answer, disease diagnosis and other applications.</p>
+<p>Electronic medical records generally include disease record, inspection test results, medical orders, nursing records, etc., which have both structured information and unstructured free text. The first is the preparatory work related to data collection and data processing. Based on this, the maximum likelihood estimation of the two probabilistic models is used to automatically learn the entity relationship: Naive Bayes and Bayesian networks using NoisyOR. A knowledge map of disease-symptom relationships and disease-check relationships is derived from the extracted entities and the learned entity relationship weights.</p>
+<hr>
+<h3 id="Contents-of-invention"><a href="#Contents-of-invention" class="headerlink" title="Contents of invention"></a>Contents of invention</h3><p>This study explores an automated process for constructing a Chinese medical knowledge map based on electronic medical records that correlates disease with symptoms that may be caused by the disease or related medical examinations.</p>
+<p>1.Data collection and preparation</p>
+<p>1.1 Extract concepts from electronic medical records</p>
+<p>We extracted the positively mentioned diseases and symptoms (concepts) from structured and unstructured data. The structured data consists of the ICD-9 (International Classification of Diseases) diagnostic code. Unstructured data is reviewed by the chief complaint, triage assessment, nursing notes, and physician qualifications. Classification assessment refers to the free text recording the care assessment at the time of the triage.</p>
+<p>The set of diseases and symptoms considered is selected from GHKG to establish the basis for subsequent comparisons. We use string matching to search for concepts by their common names, aliases, or acronyms, where aliases and acronyms are derived from GHKG and known mappings from the Unified Medical Language System (UMLS). Similarly, if a link to the ICD-9 code is provided, we will search for the code in the structured management data of the record. In addition, what happens within the negative range is not counted.</p>
+<p>1.2 Google (GHKG) Health Knowledge Map</p>
+<p>A novel aspect of our research is the use of extensive and manually curated health knowledge charts provided and licensed by Google. The Google Health Knowledge Chart was first released in 2015 to help users make healthy decisions. Google created the chart using a multi-step process that took a lot of manual adjustments to the data mining technology and expert team. This map is intended for use by patients searching for Google for health information (ie, for patients).</p>
+<p>We use a subset of GHKG, and for this we provide full support in the data. We define full support for the disease as having at least 100 positive mentions and at least 10 positive mentions of symptoms. This resulted in 156 diseases and 491 symptoms. The graph consists of a medical concept (disease and symptoms) as a node and a disease symptom relationship as a margin.</p>
+<p>A few concepts in GHKG are classified as diseases and symptoms (for example, “type II diabetes” is a disease, but also a symptom of ‘polycystic ovarian cancer’). In these cases, we only designate these concepts as diseases. Each concept includes a common name for the concept, an alias, and ICD-9 code and UMLS concepts that can be mapped to. In addition, a measure of the expected frequency of the concept is provided for the disease and symptoms. For symptom nodes, the expected frequency of conditions for giving symptoms to the disease is provided as “frequent” or “always”. For disease nodes, the frequency is described by age (‘old’, ‘adult’, ‘young’, etc.) as “very frequent”, “frequent”, “rare”, “very rare” or “never”.</p>
+<p>2.Entity relationship learning algorithm</p>
+<p>For the relationship between disease and symptoms (the relationship between disease and examination), the weight of the entity relationship used in the model study is used to measure the probability of causing a symptom in the case of a disease. Therefore, the model is essentially a mechanism for statistical learning based on the co-occurrence of the concept of disease and symptom entities in electronic medical records, and also to learn and measure the causal relationship between disease and symptoms. Diseases and symptoms as nodes, the relationship between the two and their weights as the edge between the nodes, and the disease is the cause, the symptoms or the results of the examination are fruit, so the side points from the disease node to the symptom or check the directed edge of the node, A variety of different diseases and symptoms, examinations and other nodes and corresponding edges naturally constitute a directed acyclic graph.</p>
+<p>2.1 Causal analysis of the model:</p>
+<p>When broadly inferring differences in model performance, the disease-symptom knowledge map is essentially a causal map that describes how the disease causes symptoms. Defining a good knowledge map using causal queries can be done through Pearl’s ‘do’ operant. We intervene in this operator and set a disease “appear” or “do not appear” and see how it affects the likelihood of a symptom. This possibility is expressed by the measure of importance (IMPT) between disease and symptoms.</p>
+<p>The weights of the edges i, j in the real map are closely related to the likelihood ratio of the symptoms, because we intervene and do the intervention: set the disease to “appear” or “do not appear”. By using Pearl’s do-calculus to develop an importance measure, we are able to unravel the relationship between disease and symptoms simply because the disease often occurs with other diseases that cause it.</p>
+<p>3.Entity learning based on naive Bayesian model</p>
+<p>3.1 Naive Bayes’ assumptions in constructing medical knowledge graph:<br>The definition of Naive Bayes is: conditional independence between symptom subnodes. In the case of the present study, this translates into symptoms that are conditionally independent of each other given the parent node of the disease. This is an oversimplification because for a disease, the appearance of one symptom may make another symptom more likely. For example, for the disease “bronchitis”, “congestion” and “headache” are common symptoms. Although these two conditions do not always occur at the same time as the disease occurs, “congestion” increases the likelihood of “headache”.</p>
+<p>3.2 Specific steps for constructing a medical knowledge map using the naive Bayesian model:</p>
+<p>According to the analysis of the application of the naive Bayesian model in this study and the calculation scheme of IMPT, the general idea process of learning the relationship between disease-symptoms and disease-inspection and constructing the corresponding knowledge map is given, which is mainly divided into four step:<br>Step A: Extract physical concepts such as diseases, symptoms, and examinations that have been identified in each medical record in a non-negative range.<br>Step B: Using the extracted entities to form a co-occurrence matrix of patient-disease, patient-symptom and patient-examination.<br>Step C: First set the threshold of the number of co-occurrences of the disease entity and the symptom or check entity as a test for denoising measures, then count all the results according to the co-occurrence matrix and calculate the value of the conditional probability in each pair of disease-symptoms or diseases-tested IMPT, thereby calculating a value corresponding to the importance measure of each pair of disease-symptoms or diseases-examination.<br>Step D: A knowledge map of the relationship between each disease formation and disease-symptoms and disease-examination.</p>
+<p>4.Entity relationship learning based on NoisyOR model</p>
+<p>4.1 The assumption of NoisyOR in constructing a medical knowledge graph:<br>One of the core assumptions of the NoisyOR model is the effect independence hypothesis. This hypothesis is oversimplified because the symptoms may behave very differently from each disease in the case of multiple diseases.</p>
+<p>By learning the model parameters using maximum likelihood estimation and deriving the importance metrics from the conditional probability distribution, we do not make assumptions about the prior distribution of the disease. This is an important point to distinguish between NoisyOR and Naïve Bayes, which implicitly believes that the disease is independent. Of the environmental settings considered in this study, the disease is of course not independent. For example, given that patients often exhibit very few diseases, the presence of a disease usually reduces the likelihood of other diseases.</p>
+<p>NoisyOR is a conditional probability distribution that describes the causal mechanism by which the parent node affects the state of the child nodes. In the method of constructing the medical knowledge map proposed in this paper, the mechanism belonging to the parent disease node affects the performance of its sub-symptom node. In a deterministic, “noise” environment, the onset of a potential disease will always cause its symptoms to be observed, and if any of the parental diseases of a symptom “appear”, the symptoms can be observed. For example, if a patient is infected with “flu” or has “mononucleosis”, it will “fever.”</p>
+<p>However, in real life, this process is far from certain, which is where the “Noisy” part appears: even with the “flu”, patients may not have a “fever”. Also, the appearance of “fever” may be neither because of “flu” nor because of “mononucleosis.” NoisyOR handles the inherent “noise” in the process by introducing fault and leakage probabilities.</p>
+<p>4.2 Specific steps for constructing a medical knowledge graph using the NoisyOR model:<br>According to the analysis of the application of NoisyOR model in this study and the calculation scheme of IMPT, the general idea process of constructing the knowledge map of disease-symptoms and disease-inspection relationship is given, which is mainly divided into four steps:<br>Step A: Extract physical concepts such as diseases, symptoms, and examinations that have been identified in each medical record in a non-negative range.<br>Step B: Using the extracted entities to form a co-occurrence matrix of patient-disease, patient-symptom and patient-examination.<br>Step C: Calculate all results according to the co-occurrence matrix and calculate the value of the conditional probability in each pair of disease-symptoms or diseases-examined IMPT to calculate a value corresponding to the importance measure for each pair of disease-symptoms or disease-examinations.<br>Step D: A knowledge map of the relationship between each disease formation and disease-symptoms and disease-examination.</p>
+<hr>
+<h3 id="Main-contribution-of-this-article"><a href="#Main-contribution-of-this-article" class="headerlink" title="Main contribution of this article"></a>Main contribution of this article</h3><p>1) The medical knowledge graph is the cornerstone of smart healthcare and is expected to bring more efficient and accurate medical services. However, existing knowledge map construction techniques generally have problems such as low efficiency, limited limitations, and poor scalability in the medical field. For medical data cross-language, professional and complex structure. With the development of medical information, medical electronic data has accumulated. Building a knowledge map in the medical field, it is possible to extract medical knowledge from massive data, and manage, share and apply it reasonably and efficiently. It is of great significance to today’s medical industry and is a research hotspot of many enterprises and research institutions. The medical knowledge map combines the knowledge map with medical knowledge, and will promote the automation and intelligent processing of medical data, bringing new development opportunities for the medical industry.</p>
+<p>2) This paper mainly provides a method for constructing medical knowledge graphs, and mainly uses two machine learning methods(statistical methods) to learn medical entity relationships. Based on the concept of the extracted medical entity, select the medical entities (sickness, symptoms and examinations) that appear positively in the medical record, remove the entities in the negative text range, and use machine learning algorithms such as Naive Bayes and NoisyOR. Learn about disease-symptoms and disease-check relationships to establish appropriate disease-symptoms and diseases-inspection knowledge maps based on entity and entity relationships.</p>
+  	
+					
+	  </div>     
+	  
+
+	<div class="post-footer">
+
+  <div class="post-footer-other">
+      <span class="post-footer-item">
+        
+
+
+
+
+<span class="donate-btn">
+	<span class="iconfont icon-donate"></span>
+</span>
+
+
+<div id="donate-box" class="sildeUpMin">
+
+	<span class="donate-cancel iconfont icon-cancel"></span>
+
+	<div class="donate-img-box">
+		<img id="donate-qr-wechat" class="noLazyLoad donate-img" src="/images/donate1.png" alt="No Donate Image!">	
+		<img id="donate-qr-alipay" class="noLazyLoad donate-img" src="/images/donate2.png" alt="No Donate Image!">	
+	</div>
+
+	<span class="donate-word">世界美好 你也是</span>
+
+	<div class="donate-list">
+		<span class="iconfont icon-donate-wechat"></span>
+		<span class="iconfont icon-donate-alipay"></span>
+	</div>
+
+</div>
+
+ 
+      </span>           
+      <span class="post-footer-item">
+        
+	
+<script id="-mob-share" src="http://f1.webshare.mob.com/code/mob-share.js?appkey=21d601593a1de"></script>
+	
+	<span class="share-btn">
+	<span class="iconfont icon-share"></span>
+	</span>
+
+
+	<div class="-mob-share sildeUpMin">
+		<div class="-mob-inner">
+		   			             
+            <a class="iconfont icon-share-qq -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-weixin -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-weibo -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-douban -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-facebook -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-twitter -mob-share-link"></a>		
+     	   			             
+            <a class="iconfont icon-share-google -mob-share-link"></a>		
+     	   
+		</div>
+	</div>	
+
+      </span>           
+  </div>  
+
+  <div class="post-footer-meta">
+        	
+
+        
+          <i class="iconfont icon-tag"></i>     
+            <a class="tag-link" href="/tags/NLP/">NLP</a> <a class="tag-link" href="/tags/knowledge-graph/">knowledge graph</a> <a class="tag-link" href="/tags/medical/">medical</a>    
+        	
+  </div>
+
+</div>
+
+
+<nav class="post-footer-nav">
+  
+  
+    <div class="post-footer-link">
+      <a href="/2018/10/18/multiTaskOptimization/" id="post-nav-older" class="post-nav-link-wrap">
+        <strong class="post-nav-caption">older</strong>
+        
+          <a class="post-nav-title" href="/2018/10/18/multiTaskOptimization/">
+          multiTaskOptimization</a>
+      </a>
+    </div>
+  
+</nav>
+ 
+	
+	
+</article>
+
+          </section> 
+      </div>            
+    
+    <a id="backTop">
+      <span>
+        <i class="iconfont icon-backtotop"></i>
+      </span>
+    </a> 
+
+  
+    
+    <div class="search-container sildeUpMin">
+        <div class="search-header">
+            <input type="text" placeholder="Typing Something here." id="search-input" class="search-input">
+            <span class="search-cancel">
+                <i class="iconfont icon-cancel">
+            </i></span>
+        </div>
+        <div id="search-result" class="search-result"></div>
+    </div>
+ 
+     <div class="mobile-menu">      
+
+      
+      <img class="mobile-menu-icon" src="/images/favicon.png">   
+      
+
+         
+            
+
+            <a class="mobile-menu-link" href="/">Home
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/archives">Archives
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/tags">Tags
+            </a>
+            
+         
+            
+
+            <a class="mobile-menu-link" href="/about">About
+            </a>
+            
+         
+                          
+
+            <a class="mobile-menu-link mobile-menu-search" href="#">Search </a>                 
+            
+         
+      
+</div>        
+    
+
+
+
+     
+    
+
+
+
+
+<footer id="footer">	    
+
+		
+		<div class="footer-copyright">
+		&copy;
+		
+		2018		
+	
+		Lemon
+		<br>
+
+		Theme by
+		<a href="https://github.com/Lemonreds/hexo-theme-Nayo" target="_blank">Nayo</a>	
+		</div>			
+	 
+</footer>   
+
+  
+
+    <script src="/nayo.bundle.js"></script>           
+  </body>        
+</html>
