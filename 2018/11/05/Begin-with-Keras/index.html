@@ -92,7 +92,7 @@
 	
 		<i class="iconfont icon-words"></i>
 		<span>
-			11029
+			11030
 		</span>
 	
 </div>
@@ -110,6 +110,7 @@
 <li>Keras is an excellent framework for deep learning, I am willing to write something about Keras in this blog. Adding with some example codes, I think we can understand the accessibility of Keras in details.</li>
 </ul>
 </blockquote>
+<a id="more"></a>
 <hr>
 <h2 id="Why-choose-Keras"><a href="#Why-choose-Keras" class="headerlink" title="Why choose Keras?"></a>Why choose Keras?</h2><p>KEras &amp; TEnsorflow(KETE) combo rocks.</p>
 <h3 id="1-Perfect-integration-with-Tensorflow"><a href="#1-Perfect-integration-with-Tensorflow" class="headerlink" title="1. Perfect integration with Tensorflow"></a>1. Perfect integration with Tensorflow</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> keras <span class="keyword">import</span> backend <span class="keyword">as</span> k</span><br><span class="line"><span class="keyword">from</span> keras.layers <span class="keyword">import</span> Dense</span><br><span class="line"><span class="keyword">from</span> keras.objectives <span class="keyword">import</span> categorical_crossentropy</span><br><span class="line"></span><br><span class="line"><span class="comment"># this placeholder will contain our input digits, as flat vectors</span></span><br><span class="line">img = tf.placeholder(tf.float32, shape=(<span class="keyword">None</span>,<span class="number">784</span>))</span><br><span class="line"><span class="comment"># Keras layers can be called on Tensorflow tensors:</span></span><br><span class="line"><span class="comment"># fully-connected layer with 128 units and ReLU activation</span></span><br><span class="line">x = Dense(<span class="number">128</span>, activation=<span class="string">'relu'</span>)(img)</span><br><span class="line">x = Dense(<span class="number">128</span>, activation=<span class="string">'relu'</span>)(x)</span><br></pre></td></tr></table></figure>
